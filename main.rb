@@ -144,6 +144,29 @@ class Tree
 			arr
 		end
 	end
+
+	def height(current_node = nil, height_result = 0)
+		if (current_node.left == nil) && (current_node.right == nil)
+			height_result
+		elsif (current_node.left != nil) || (current_node.right != nil)
+			lh = height(current_node.left,height_result+1) if current_node.left != nil
+			rh = height(current_node.right,height_result+1) if current_node.right != nil
+			lh.to_i > rh.to_i ? lh:rh
+		end
+	end
+
+	def depth(given_node, current_node = @root, depth_result = 0)
+		if current_node == given_node
+			depth_result
+		else
+			if given_node.value < current_node.value
+				depth(given_node, current_node.left,depth_result+1)
+			else
+				depth(given_node, current_node.right,depth_result+1)
+			end
+		end
+	end
+
 end
 
 
@@ -151,7 +174,13 @@ end
 
 input_array = [20,50,30,70,40,60,80]
 
-
 a = Tree.new(input_array)
 
-p a.level_order
+
+
+
+
+
+
+
+
